@@ -21,17 +21,17 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        List<String> notes=new ArrayList<>();
+        List<Note> notes=new ArrayList<>();
+        notes.add(new Note(1,"Name1","Content1"));
+        notes.add(new Note(2,"Name2","Content2"));
+        notes.add(new Note(3,"Name3","Content3"));
+        notes.add(new Note(4,"Name4","Content4"));
+        notes.add(new Note(5,"Name5","Content5"));
 
-        notes.add("1-Name1-Content1");
-        notes.add("2-Name2-Content2");
-        notes.add("3-Name3-Content3");
-        notes.add("4-Name4-Content4");
-        notes.add("5-Name5-Content5");
-
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, notes);
+        ArrayAdapter<Note> arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, notes);
 
         ListView listView= findViewById(R.id.listView);
+
         listView.setAdapter(arrayAdapter);
 
 
