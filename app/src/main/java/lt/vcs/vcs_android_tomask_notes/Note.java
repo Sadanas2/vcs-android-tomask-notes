@@ -56,9 +56,9 @@ public class Note {
     public String toString() {
         return
                 "id=" + id +
-                ", name='" + name + '\'' +
-                ", content='" + content + '\'' +
-                ", creationDate=" + creationDate +
-                ", updateDate=" + updateDate;
+                " / " + name  +
+                " / '" + content +
+                " / =" + creationDate +
+                " / " + updateDate;
     }
 }

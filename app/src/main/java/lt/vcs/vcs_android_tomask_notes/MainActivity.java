@@ -33,11 +33,7 @@ public class MainActivity extends AppCompatActivity {
             i++;
 
         }
-        notes.add(new Note(1,"Name1","Content1"));
-        notes.add(new Note(2,"Name2","Content2"));
-        notes.add(new Note(3,"Name3","Content3"));
-        notes.add(new Note(4,"Name4","Content4"));
-        notes.add(new Note(5,"Name5","Content5"));
+
 
         ArrayAdapter<Note> arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, notes);
 
