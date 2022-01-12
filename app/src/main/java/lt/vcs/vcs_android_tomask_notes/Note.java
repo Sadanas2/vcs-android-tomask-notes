@@ -1,6 +1,8 @@
 package lt.vcs.vcs_android_tomask_notes;
 
+import java.time.DateTimeException;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class Note {
 
@@ -9,6 +11,7 @@ public class Note {
     private String content;
     private LocalDateTime creationDate;
     private LocalDateTime updateDate;
+    final DateTimeFormatter formatter= DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
     public Note(int id, String name, String content) {
 
@@ -55,10 +58,10 @@ public class Note {
 
     public String toString() {
         return
-                "id=" + id +
+                "id" + id +
                 " / " + name  +
-                " / '" + content +
-                " / =" + creationDate +
-                " / " + updateDate;
+                " / " + content +
+                " / " + creationDate.format(formatter) +
+                " / " + updateDate.format(formatter);
     }
 }
