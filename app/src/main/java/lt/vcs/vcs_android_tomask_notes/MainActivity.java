@@ -11,6 +11,7 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -22,6 +23,16 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         List<Note> notes=new ArrayList<>();
+
+        Random random= new Random();
+        Note note;
+        int i=1;
+        while(i<=10){
+            note=new Note(i,"Name"+i,"Content"+i+" - "+random.nextInt(100000));
+            notes.add(note);
+            i++;
+
+        }
         notes.add(new Note(1,"Name1","Content1"));
         notes.add(new Note(2,"Name2","Content2"));
         notes.add(new Note(3,"Name3","Content3"));
