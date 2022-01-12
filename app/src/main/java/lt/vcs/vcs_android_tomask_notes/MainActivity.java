@@ -3,14 +3,18 @@ package lt.vcs.vcs_android_tomask_notes;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
+
+    private static final String TAG = "app_test";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +35,13 @@ public class MainActivity extends AppCompatActivity {
         listView.setAdapter(arrayAdapter);
 
 
+        AdapterView.OnItemClickListener listener= new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Log.i(TAG, "onItemClick"+position);
+            }
+        };
+        listView.setOnItemClickListener(listener);
     }
 
 }
