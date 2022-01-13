@@ -16,6 +16,7 @@ public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "app_test";
     private List<Note> notes;
+    private ArrayAdapter<Note> arrayAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +39,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
                 Log.i(TAG, "onItemLongClick: "+notes.get(position).getId());
+                notes.remove(position);
+                arrayAdapter.notifyDataSetChanged();
                 return true;
             }
         });
@@ -56,7 +59,8 @@ public class MainActivity extends AppCompatActivity {
     private void setUpListView(UseCaseRepository useCaseRepository, ListView listView) {
         notes= useCaseRepository.generateNoteList(15);
 
-        ArrayAdapter<Note> arrayAdapter = new ArrayAdapter<>(this, R.layout.my_list_item, notes);
+        arrayAdapter = new ArrayAdapter<>(this, R.layout.my_list_item, notes);
+
         listView.setAdapter(arrayAdapter);
 
     }
