@@ -10,13 +10,12 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "app_test";
+    private List<Note> notes;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,18 +28,21 @@ public class MainActivity extends AppCompatActivity {
 
         setUpListView(useCaseRepository, listView);
 
-        AdapterView.OnItemClickListener listener= new AdapterView.OnItemClickListener() {
+        onClickItem(listView);
+    }
+
+    private void onClickItem(ListView listView) {
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Log.i(TAG, "onItemClick"+position);
+            public void onItemClick(AdapterView< ?> parent, View view, int position, long id) {
+                Log.i(TAG, "onItemClick: "+notes.get(position).getId());
             }
-        };
-        listView.setOnItemClickListener(listener);
+        });
     }
 
     @NonNull
     private void setUpListView(UseCaseRepository useCaseRepository, ListView listView) {
-        List<Note> notes= useCaseRepository.generateNoteList(15);
+        notes= useCaseRepository.generateNoteList(15);
 
         ArrayAdapter<Note> arrayAdapter = new ArrayAdapter<>(this, R.layout.my_list_item, notes);
         listView.setAdapter(arrayAdapter);

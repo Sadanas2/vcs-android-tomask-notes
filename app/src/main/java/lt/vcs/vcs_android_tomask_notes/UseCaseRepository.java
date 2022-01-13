@@ -16,7 +16,7 @@ public class UseCaseRepository {
         Note note;
 
         int i = 1;
-        while (i <= 10) {
+        while (i <= count) {
             note = new Note(i, "Name" + i, "Content" + i + " - " + random.nextInt(100000));
             notes.add(note);
             i++;
