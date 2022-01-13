@@ -29,6 +29,18 @@ public class MainActivity extends AppCompatActivity {
         setUpListView(useCaseRepository, listView);
 
         onClickItem(listView);
+
+        onLongClickItem(listView);
+    }
+
+    private void onLongClickItem(ListView listView) {
+        listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                Log.i(TAG, "onItemLongClick: "+notes.get(position).getId());
+                return true;
+            }
+        });
     }
 
     private void onClickItem(ListView listView) {
