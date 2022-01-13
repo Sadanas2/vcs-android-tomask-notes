@@ -1,5 +1,6 @@
 package lt.vcs.vcs_android_tomask_notes;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
@@ -22,15 +23,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        UseCaseRepository useCaseRepository= new UseCaseRepository();
-        List<Note> notes= useCaseRepository.generateNoteList(15);
-
-        ArrayAdapter<Note> arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, notes);
-
         ListView listView= findViewById(R.id.listView);
 
-        listView.setAdapter(arrayAdapter);
+        UseCaseRepository useCaseRepository= new UseCaseRepository();
 
+        setUpListView(useCaseRepository, listView);
 
         AdapterView.OnItemClickListener listener= new AdapterView.OnItemClickListener() {
             @Override
@@ -39,6 +36,15 @@ public class MainActivity extends AppCompatActivity {
             }
         };
         listView.setOnItemClickListener(listener);
+    }
+
+    @NonNull
+    private void setUpListView(UseCaseRepository useCaseRepository, ListView listView) {
+        List<Note> notes= useCaseRepository.generateNoteList(15);
+
+        ArrayAdapter<Note> arrayAdapter = new ArrayAdapter<>(this, R.layout.my_list_item, notes);
+        listView.setAdapter(arrayAdapter);
+
     }
 
 }
