@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
                 Log.i(TAG, "onItemLongClick: " + notes.get(position).getId());
 //                notes.remove(position);
 //                arrayAdapter.notifyDataSetChanged();
-                showDialog();
+                showAlertDialog(position);
                 return true;
             }
         });
@@ -68,22 +68,19 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void showDialog() {
+    private void showAlertDialog(int position) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-
-        builder.setMessage("Are you sure you would like to remove?");
-        DialogInterface.OnClickListener listener= new DialogInterface.OnClickListener() {
+        builder
+                .setMessage("Are you sure you would like to remove?")
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
             @Override
-            public void onClick(AdapterView<?> parent, View view, int position, long id) {
-                Log.i(TAG, "onItemLongClickYes: " + notes.get(position).getId());
+            public void onClick(DialogInterface dialog, int which) {
                 notes.remove(position);
                 arrayAdapter.notifyDataSetChanged();
-
             }
-        };
-        builder.setPositiveButton("Yes", listener);
-        builder.setNegativeButton("No", null);
-        builder.show();
+        })
+                .setNegativeButton("No", null)
+                .show();
 
     }
 }
