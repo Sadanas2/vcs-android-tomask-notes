@@ -13,6 +13,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.List;
 
@@ -80,12 +81,12 @@ public class MainActivity extends AppCompatActivity {
     private void setUpFab() {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-//                Log.i(TAG, "onClick: fab");
+            public void onClick(View v) {
+                Snackbar
+                        .make(v, R.string.same_text, Snackbar.LENGTH_SHORT)
+                        .show();
             }
-        })
-        ;
-
+        });
     }
 
     private void showAlertDialog(int position) {
