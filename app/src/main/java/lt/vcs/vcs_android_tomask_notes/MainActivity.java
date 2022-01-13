@@ -12,6 +12,8 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
@@ -19,6 +21,7 @@ public class MainActivity extends AppCompatActivity {
     private static final String TAG = "app_test";
     private List<Note> notes;
     private ArrayAdapter<Note> arrayAdapter;
+    private FloatingActionButton fab;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +30,8 @@ public class MainActivity extends AppCompatActivity {
 
         ListView listView = findViewById(R.id.listView);
 
+        fab= findViewById(R.id.fab);
+
         UseCaseRepository useCaseRepository = new UseCaseRepository();
 
         setUpListView(useCaseRepository, listView);
@@ -34,7 +39,11 @@ public class MainActivity extends AppCompatActivity {
         onClickItem(listView);
 
         onLongClickItem(listView);
+
+        setUpFab();
     }
+
+
 
     private void onLongClickItem(ListView listView) {
         listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
@@ -65,6 +74,17 @@ public class MainActivity extends AppCompatActivity {
         arrayAdapter = new ArrayAdapter<>(this, R.layout.my_list_item, notes);
 
         listView.setAdapter(arrayAdapter);
+
+    }
+
+    private void setUpFab() {
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+//                Log.i(TAG, "onClick: fab");
+            }
+        })
+        ;
 
     }
 
