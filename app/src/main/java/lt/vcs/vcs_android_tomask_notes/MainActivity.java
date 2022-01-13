@@ -1,8 +1,10 @@
 package lt.vcs.vcs_android_tomask_notes;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -23,9 +25,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        ListView listView= findViewById(R.id.listView);
+        ListView listView = findViewById(R.id.listView);
 
-        UseCaseRepository useCaseRepository= new UseCaseRepository();
+        UseCaseRepository useCaseRepository = new UseCaseRepository();
 
         setUpListView(useCaseRepository, listView);
 
@@ -38,9 +40,10 @@ public class MainActivity extends AppCompatActivity {
         listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-                Log.i(TAG, "onItemLongClick: "+notes.get(position).getId());
-                notes.remove(position);
-                arrayAdapter.notifyDataSetChanged();
+                Log.i(TAG, "onItemLongClick: " + notes.get(position).getId());
+//                notes.remove(position);
+//                arrayAdapter.notifyDataSetChanged();
+                showDialog();
                 return true;
             }
         });
@@ -49,15 +52,15 @@ public class MainActivity extends AppCompatActivity {
     private void onClickItem(ListView listView) {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView< ?> parent, View view, int position, long id) {
-                Log.i(TAG, "onItemClick: "+notes.get(position).getId());
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Log.i(TAG, "onItemClick: " + notes.get(position).getId());
             }
         });
     }
 
     @NonNull
     private void setUpListView(UseCaseRepository useCaseRepository, ListView listView) {
-        notes= useCaseRepository.generateNoteList(15);
+        notes = useCaseRepository.generateNoteList(15);
 
         arrayAdapter = new ArrayAdapter<>(this, R.layout.my_list_item, notes);
 
@@ -65,4 +68,22 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    private void showDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+        builder.setMessage("Are you sure you would like to remove?");
+        DialogInterface.OnClickListener listener= new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(AdapterView<?> parent, View view, int position, long id) {
+                Log.i(TAG, "onItemLongClickYes: " + notes.get(position).getId());
+                notes.remove(position);
+                arrayAdapter.notifyDataSetChanged();
+
+            }
+        };
+        builder.setPositiveButton("Yes", listener);
+        builder.setNegativeButton("No", null);
+        builder.show();
+
+    }
 }
