@@ -20,7 +20,7 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    private static final String TAG = "app_test";
+    public static final String TAG = "app_test";
     private List<Note> notes;
     private ArrayAdapter<Note> arrayAdapter;
     private FloatingActionButton fab;
@@ -67,7 +67,9 @@ public class MainActivity extends AppCompatActivity {
 //                Log.i(TAG, "onItemClick: " + notes.get(position).getId());
 
                 Intent intent= new Intent(MainActivity.this, NoteDetails.class);
-                startActivity(intent);
+                intent.putExtra("lt.vcs.tomask.main_activity_one", notes.get(position).getName());
+                intent.putExtra("lt.vcs.tomask.main_activity_two", notes.get(position).getUpdateDate().toString());
+            startActivity(intent);
             }
         });
     }

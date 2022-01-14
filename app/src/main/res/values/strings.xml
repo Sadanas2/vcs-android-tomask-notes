@@ -1,4 +1,4 @@
 <resources>
-    <string name="app_name">vcs-android-tomask-notes</string>
+    <string name="app_name">tomask_Notes</string>
     <string name="same_text">Name is missing</string>
 </resources>
