@@ -1,5 +1,7 @@
 package lt.vcs.vcs_android_tomask_notes;
 
+import static lt.vcs.vcs_android_tomask_notes.Constants.DATABASE_NAME;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -41,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
                 Room.databaseBuilder(
                         getApplicationContext(),
                         MainDatabase.class,
-                        "main"
+                        DATABASE_NAME
                 )   .allowMainThreadQueries()
             	    .fallbackToDestructiveMigration()
                     .build();

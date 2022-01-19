@@ -1,5 +1,7 @@
 package lt.vcs.vcs_android_tomask_notes;
 
+import static lt.vcs.vcs_android_tomask_notes.Constants.DATABASE_TABLE_NOTES;
+
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.Ignore;
@@ -8,7 +10,7 @@ import androidx.room.PrimaryKey;
 import java.time.DateTimeException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-@Entity(tableName = "notes")
+@Entity(tableName = DATABASE_TABLE_NOTES)
 
 public class Note {
 
