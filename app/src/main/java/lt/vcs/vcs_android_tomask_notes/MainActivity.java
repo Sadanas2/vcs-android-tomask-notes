@@ -3,6 +3,7 @@ package lt.vcs.vcs_android_tomask_notes;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.room.Room;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -32,11 +33,24 @@ public class MainActivity extends AppCompatActivity {
 
         ListView listView = findViewById(R.id.listView);
 
-        fab= findViewById(R.id.fab);
-
         UseCaseRepository useCaseRepository = new UseCaseRepository();
 
         setUpListView(useCaseRepository, listView);
+
+        MainDatabase database =
+                Room.databaseBuilder(
+                        getApplicationContext(),
+                        MainDatabase.class,
+                        "main"
+                )   .allowMainThreadQueries()
+            	    .fallbackToDestructiveMigration()
+                    .build();
+
+        NoteDao noteDao = database.noteDao();
+//        noteDao.getAll()
+        noteDao.insertNotes(notes);
+
+        fab= findViewById(R.id.fab);
 
         onClickItem(listView);
 

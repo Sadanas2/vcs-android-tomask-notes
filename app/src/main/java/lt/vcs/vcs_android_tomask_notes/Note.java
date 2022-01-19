@@ -1,16 +1,35 @@
 package lt.vcs.vcs_android_tomask_notes;
 
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.Ignore;
+import androidx.room.PrimaryKey;
+
 import java.time.DateTimeException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+@Entity(tableName = "notes")
 
 public class Note {
 
+    @PrimaryKey
     private int id;
+
+    @ColumnInfo(name="note_name")
     private String name;
+
+    @ColumnInfo (name = "note_content")
     private String content;
+
+    @Ignore
+    @ColumnInfo (name ="create_date")
     private LocalDateTime creationDate;
+
+    @Ignore
+    @ColumnInfo (name ="update_date")
     private LocalDateTime updateDate;
+
+   @Ignore
     final DateTimeFormatter formatter= DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
     public Note(int id, String name, String content) {
@@ -25,7 +44,6 @@ public class Note {
     public int getId() {
         return id;
     }
-
 
     public String getName() {
         return name;
@@ -46,7 +64,6 @@ public class Note {
     public LocalDateTime getCreationDate() {
         return creationDate;
     }
-
 
     public LocalDateTime getUpdateDate() {
         return updateDate;
