@@ -14,6 +14,9 @@ public interface NoteDao {
         @Query("SELECT * FROM "+DATABASE_TABLE_NOTES)
         List<Note> getAll();
 
+        @Query("SELECT * FROM " + DATABASE_TABLE_NOTES + " WHERE id=:id")
+        Note getItem(int id);
+
         @Insert(onConflict = OnConflictStrategy.REPLACE)
         void insertNotes(List<Note> notes);
 

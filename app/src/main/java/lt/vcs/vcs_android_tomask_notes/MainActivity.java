@@ -1,5 +1,6 @@
 package lt.vcs.vcs_android_tomask_notes;
 
+import static lt.vcs.vcs_android_tomask_notes.Constants.APP_TEST;
 import static lt.vcs.vcs_android_tomask_notes.Constants.DATABASE_NAME;
 
 import androidx.annotation.NonNull;
@@ -37,22 +38,27 @@ public class MainActivity extends AppCompatActivity {
 
         UseCaseRepository useCaseRepository = new UseCaseRepository();
 
-        setUpListView(useCaseRepository, listView);
 
         MainDatabase database =
                 Room.databaseBuilder(
                         getApplicationContext(),
                         MainDatabase.class,
                         DATABASE_NAME
-                )   .allowMainThreadQueries()
-            	    .fallbackToDestructiveMigration()
-                    .build();
+                ).allowMainThreadQueries()
+                        .fallbackToDestructiveMigration()
+                        .build();
 
         NoteDao noteDao = database.noteDao();
-//        noteDao.getAll()
-        noteDao.insertNotes(notes);
 
-        fab= findViewById(R.id.fab);
+        noteDao.getAll();
+        Log.i(APP_TEST, "onCreate: " + noteDao.getAll());
+        Log.i(APP_TEST, "onCreate: " + noteDao.getItem(5));
+
+
+//        noteDao.insertNotes(notes);
+
+//        fab= findViewById(R.id.fab);
+        setUpListView(useCaseRepository, listView);
 
         onClickItem(listView);
 
@@ -62,14 +68,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-
     private void onLongClickItem(ListView listView) {
         listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
                 Log.i(TAG, "onItemLongClick: " + notes.get(position).getId());
-//                notes.remove(position);
-//                arrayAdapter.notifyDataSetChanged();
                 showAlertDialog(position);
                 return true;
             }
@@ -82,22 +85,12 @@ public class MainActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 //                Log.i(TAG, "onItemClick: " + notes.get(position).getId());
 
-                Intent intent= new Intent(MainActivity.this, NoteDetails.class);
+                Intent intent = new Intent(MainActivity.this, NoteDetails.class);
                 intent.putExtra("lt.vcs.tomask.main_activity_one", notes.get(position).getName());
                 intent.putExtra("lt.vcs.tomask.main_activity_two", notes.get(position).getUpdateDate().toString());
-            startActivity(intent);
+                startActivity(intent);
             }
         });
-    }
-
-    @NonNull
-    private void setUpListView(UseCaseRepository useCaseRepository, ListView listView) {
-        notes = useCaseRepository.generateNoteList(15);
-
-        arrayAdapter = new ArrayAdapter<>(this, R.layout.my_list_item, notes);
-
-        listView.setAdapter(arrayAdapter);
-
     }
 
     private void setUpFab() {
@@ -116,14 +109,25 @@ public class MainActivity extends AppCompatActivity {
         builder
                 .setMessage("Are you sure you would like to remove?")
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                notes.remove(position);
-                arrayAdapter.notifyDataSetChanged();
-            }
-        })
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        notes.remove(position);
+                        arrayAdapter.notifyDataSetChanged();
+                    }
+                })
                 .setNegativeButton("No", null)
                 .show();
+
+    }
+
+
+    @NonNull
+    private void setUpListView(UseCaseRepository useCaseRepository, ListView listView) {
+        notes = useCaseRepository.generateNoteList(15);
+
+        arrayAdapter = new ArrayAdapter<>(this, R.layout.my_list_item, notes);
+
+        listView.setAdapter(arrayAdapter);
 
     }
 }

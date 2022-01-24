@@ -23,7 +23,7 @@ public class Note {
     @ColumnInfo (name = "note_content")
     private String content;
 
-    @Ignore
+
     @ColumnInfo (name ="create_date")
     private LocalDateTime creationDate;
 
@@ -65,6 +65,10 @@ public class Note {
 
     public LocalDateTime getCreationDate() {
         return creationDate;
+    }
+
+    public void setCreationDate(LocalDateTime creationDate){
+        this.creationDate=creationDate;
     }
 
     public LocalDateTime getUpdateDate() {
