@@ -1,10 +1,12 @@
-package lt.vcs.vcs_android_tomask_notes;
+package lt.vcs.vcs_android_tomask_notes.repository;
 
 import androidx.annotation.NonNull;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+
+import lt.vcs.vcs_android_tomask_notes.module.Note;
 
 public class UseCaseRepository {
 

@@ -1,4 +1,4 @@
-package lt.vcs.vcs_android_tomask_notes;
+package lt.vcs.vcs_android_tomask_notes.module;
 
 import static lt.vcs.vcs_android_tomask_notes.Constants.DATABASE_TABLE_NOTES;
 

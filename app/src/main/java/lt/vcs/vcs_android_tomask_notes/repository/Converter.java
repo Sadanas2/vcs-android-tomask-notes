@@ -1,4 +1,4 @@
-package lt.vcs.vcs_android_tomask_notes;
+package lt.vcs.vcs_android_tomask_notes.repository;
 
 import androidx.room.TypeConverter;
 import java.time.Instant;

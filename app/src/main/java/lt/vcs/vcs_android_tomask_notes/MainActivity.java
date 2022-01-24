@@ -22,6 +22,11 @@ import com.google.android.material.snackbar.Snackbar;
 
 import java.util.List;
 
+import lt.vcs.vcs_android_tomask_notes.module.Note;
+import lt.vcs.vcs_android_tomask_notes.repository.MainDatabase;
+import lt.vcs.vcs_android_tomask_notes.repository.NoteDao;
+import lt.vcs.vcs_android_tomask_notes.repository.UseCaseRepository;
+
 public class MainActivity extends AppCompatActivity {
 
     public static final String TAG = "app_test";
